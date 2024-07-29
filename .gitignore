@@ -3,4 +3,5 @@
 *.png
 *.ogg
 lib/
+*.zip
 progress.json
