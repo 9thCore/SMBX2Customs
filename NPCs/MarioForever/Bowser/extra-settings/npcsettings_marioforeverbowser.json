@@ -1505,7 +1505,7 @@
 											"name": "hit.health.graphics.icon.file",
 											"title": "File",
 											"filters": ["*.png", "*.gif"],
-											"value-default": "marioforeverbowser/images/hpicon.png"
+											"value-default": ""
 										},
 										{
 											"control": "group",
@@ -1558,7 +1558,7 @@
 											"name": "hit.health.graphics.health.file",
 											"title": "File",
 											"filters": ["*.png", "*.gif"],
-											"value-default": "marioforeverbowser/images/hp.png"
+											"value-default": ""
 										},
 										{
 											"control": "group",
@@ -1631,7 +1631,7 @@
 											"name": "hit.health.graphics.armor.file",
 											"title": "File",
 											"filters": ["*.png", "*.gif"],
-											"value-default": "marioforeverbowser/images/hparmor.png"
+											"value-default": ""
 										},
 										{
 											"control": "group",
