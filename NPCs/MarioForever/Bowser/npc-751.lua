@@ -10,7 +10,7 @@ local sampleNPC = {}
 --NPC_ID is dynamic based on the name of the library file
 local npcID = NPC_ID
 
-local getValue, getID, getValuePredicate, getRange, getRangeInt, getRangeIntConfig, setState, wrapIntInRange, getDamage, playSFXIDOrFile
+local getValue, getID, getValuePredicate, getRange, getRangeInt, getRangeIntConfig, setState, getDamage, playSFXIDOrFile
 
 local STATES = {
 	MOVING = 0,
@@ -263,7 +263,7 @@ local DEFAULT_FUNCTIONS = {
 	onDraw = function(v)
 		if v.collidesBlockBottom then
 			npcUtils.drawNPC(v, {
-				frame = wrapIntInRange(v.animationFrame, 0, 4),
+				frame = math.wrap(v.animationFrame, 0, 4),
 				opacity = GET_OPACITY(v)
 			})
 		else
@@ -430,7 +430,7 @@ local STATE_MACHINE = {
 			local data = v.data
 			if data.firestate == 0 then
 				npcUtils.drawNPC(v, {
-					frame = wrapIntInRange(v.animationFrame, 4, 6),
+					frame = math.wrap(v.animationFrame, 4, 6),
 					opacity = GET_OPACITY(v)
 				})
 			elseif data.firestate == 1 then
@@ -542,7 +542,7 @@ local STATE_MACHINE = {
 				})
 			elseif data.firestate == 1 then
 				npcUtils.drawNPC(v, {
-					frame = wrapIntInRange(v.animationFrame, 6, 10),
+					frame = math.wrap(v.animationFrame, 6, 10),
 					opacity = GET_OPACITY(v)
 				})
 			end
@@ -613,7 +613,7 @@ local STATE_MACHINE = {
 				})
 			elseif data.firestate == 1 then
 				npcUtils.drawNPC(v, {
-					frame = wrapIntInRange(v.animationFrame, 12, 14),
+					frame = math.wrap(v.animationFrame, 12, 14),
 					opacity = GET_OPACITY(v)
 				})
 			end
@@ -764,7 +764,7 @@ local STATE_MACHINE = {
 		end,
 		onDraw = function(v)
 			npcUtils.drawNPC(v, {
-				frame = wrapIntInRange(v.animationFrame, 10, 12)
+				frame = math.wrap(v.animationFrame, 10, 12)
 			})
 			DRAW_HEALTH(v)
 		end
@@ -986,8 +986,8 @@ local sampleNPCSettings = {
 	["attack.standard.breath.audio.id"] = 0, -- Attack Settings/Standard/Breath/Audio/ID
 	["attack.standard.breath.audio.file"] = "marioforeverbowser/sounds/flame.ogg", -- Attack Settings/Standard/Breath/Audio/File
 	["attack.standard.breath.chase.enabled"] = 1, -- Attack Settings/Standard/Breath/Chase/Enabled, 1 means enabled and any other value means disabled
-	["attack.standard.breath.chase.range.start"] = -32, -- Attack Settings/Standard/Breath/Chase/Range/Start
-	["attack.standard.breath.chase.range.length"] = 64, -- Attack Settings/Standard/Breath/Chase/Range/Length
+	["attack.standard.breath.chase.range.start"] = -16, -- Attack Settings/Standard/Breath/Chase/Imprecision Range/Start
+	["attack.standard.breath.chase.range.length"] = 32, -- Attack Settings/Standard/Breath/Chase/Imprecision Range/Length
 	["attack.standard.spawn.center"] = 1, -- Attack Settings/Standard/Spawn/Center, 1 means enabled and any other value means disabled
 	["attack.standard.spawn.offset.x"] = 0, -- Attack Settings/Standard/Spawn/Offset/X
 	["attack.standard.spawn.offset.y"] = 16, -- Attack Settings/Standard/Spawn/Offset/Y
@@ -1002,8 +1002,8 @@ local sampleNPCSettings = {
 	["attack.multi.breath.audio.id"] = 0, -- Attack Settings/Multifire/Breath/Audio/ID
 	["attack.multi.breath.audio.file"] = "marioforeverbowser/sounds/flame.ogg", -- Attack Settings/Multifire/Breath/Audio/File
 	["attack.multi.breath.chase.enabled"] = 1, -- Attack Settings/Multifire/Breath/Chase, 1 means enabled and any other value means disabled
-	["attack.multi.breath.chase.range.start"] = -32, -- Attack Settings/Multifire/Breath/Chase/Range/Start
-	["attack.multi.breath.chase.range.length"] = 64, -- Attack Settings/Multifire/Breath/Chase/Range/Length
+	["attack.multi.breath.chase.range.start"] = -16, -- Attack Settings/Multifire/Breath/Chase/Imprecision Range/Start
+	["attack.multi.breath.chase.range.length"] = 32, -- Attack Settings/Multifire/Breath/Chase/Imprecision Range/Length
 	["attack.multi.spawn.center"] = 1, -- Attack Settings/Multifire/Spawn/Center, 1 means enabled and any other value means disabled
 	["attack.multi.spawn.offset.x"] = 0, -- Attack Settings/Multifire/Spawn/Offset/X
 	["attack.multi.spawn.offset.y"] = 16, -- Attack Settings/Multifire/Spawn/Offset/Y
@@ -1173,10 +1173,6 @@ function getRangeIntConfig(v, key)
 		return NPC.config[v.id][key .. ".start"] + RNG.randomInt(0, NPC.config[v.id][key .. ".length"])
 	end
 	return getRangeInt(v, key)
-end
-
-function wrapIntInRange(v, a, b)
-	return a + (v - a) % (b - a)
 end
 
 function getID(npc, key)
