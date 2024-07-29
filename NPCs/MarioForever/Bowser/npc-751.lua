@@ -223,12 +223,17 @@ local CHECK_HARM = function(v)
 	if data.invul > 0 then
 		data.invul = data.invul - 1
 	else
-		local player = npcUtils.getNearestPlayer(v)
-		local passed, spinjumping = Colliders.bounce(player, v)
-		if passed then
-			local name = MAP_HARM_NAME[spinjumping and HARM_TYPE_SPINJUMP or HARM_TYPE_JUMP]
-			Colliders.bounceResponse(player)
-			return HARM_WITH_TYPE(v, name)
+		local players = Player.get()
+		for i = 1, #players do
+			local player = players[i]
+			if player.deathTimer < 1 then
+				local passed, spinjumping = Colliders.bounce(player, v)
+				if passed then
+					local name = MAP_HARM_NAME[spinjumping and HARM_TYPE_SPINJUMP or HARM_TYPE_JUMP]
+					Colliders.bounceResponse(player)
+					return HARM_WITH_TYPE(v, name)
+				end
+			end
 		end
 	end
 end
