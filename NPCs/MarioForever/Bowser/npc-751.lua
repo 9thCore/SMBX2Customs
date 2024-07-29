@@ -233,6 +233,23 @@ local CHECK_HARM = function(v)
 	end
 end
 
+local POINT_IN_RECT = function(x, y, rect)
+	return x >= rect.left and x <= rect.right and y >= rect.top and y <= rect.bottom
+end
+
+local OUTSIDE_CAMERAS = function(v)
+	local cameras = Camera.get()
+	for i = 1, #cameras do
+		local rect = cameras[i].bounds
+		if POINT_IN_RECT(v.x, v.y, rect) or POINT_IN_RECT(v.x + v.width, v.y, rect) or
+		POINT_IN_RECT(v.x, v.y + v.height, rect) or POINT_IN_RECT(v.x + v.width, v.y + v.height, rect)
+		then
+			return false
+		end
+	end
+	return true
+end
+
 local DEFAULT_FUNCTIONS = {
 	onTick = function(v)
 		local data = v.data
@@ -695,7 +712,7 @@ local STATE_MACHINE = {
 				v.speedY = data.inLava and data.fallSpeedLava or data.fallSpeed
 
 				-- We can continue once the NPC is outside any camera
-				if v:mem(0x126, FIELD_BOOL) or v:mem(0x128, FIELD_BOOL) then
+				if OUTSIDE_CAMERAS(v) then
 					if data.defaultBehaviour then
 						data.deathState = 2
 
@@ -739,24 +756,26 @@ local STATE_MACHINE = {
 			if data.defaultBehaviour then
 				-- Disable all keys of all players
 				for i, player in ipairs(Player.get()) do
-					for k, v in pairs(player.keys) do
-						player.keys[k] = KEYS_UP
-					end
-					if data.deathState == 2 then
-						if data.sectionDirection == 1 then
-							player.keys.left = KEYS_DOWN
-						else
-							player.keys.right = KEYS_DOWN
+					if player.section == v.section then
+						for k, v in pairs(player.keys) do
+							player.keys[k] = KEYS_UP
 						end
-
-						-- Fake the section not having been resized
-						if player.section == v.section then
-							local section = player.sectionObj
-							local camera = handyCam[i]
+						if data.deathState == 2 then
 							if data.sectionDirection == 1 then
-								camera.x = section.boundary.left + data.sectionExtension + camera.width * 0.5
+								player.keys.left = KEYS_DOWN
 							else
-								camera.x = section.boundary.right - data.sectionExtension - camera.width * 0.5
+								player.keys.right = KEYS_DOWN
+							end
+
+							-- Fake the section not having been resized
+							if player.section == v.section then
+								local section = player.sectionObj
+								local camera = handyCam[i]
+								if data.sectionDirection == 1 then
+									camera.x = section.boundary.left + data.sectionExtension + camera.width * 0.5
+								else
+									camera.x = section.boundary.right - data.sectionExtension - camera.width * 0.5
+								end
 							end
 						end
 					end
