@@ -1,0 +1,5 @@
+*.lvlx
+*.lvlx.backup
+*.png
+*.ogg
+progress.json
