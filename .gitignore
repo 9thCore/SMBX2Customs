@@ -1,5 +1,5 @@
 *.lvlx
-*.lvlx.backup
+*.lvlx.bak
 *.png
 *.ogg
 lib/
