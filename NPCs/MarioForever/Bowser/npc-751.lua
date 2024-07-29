@@ -1228,10 +1228,6 @@ function sampleNPC.onInitAPI()
 	registerEvent(sampleNPC, "onNPCHarm")
 end
 
-local function handleSpecialStates(v)
-	-- Dummy
-end
-
 --[[
 	if STATE_MACHINE[state] exists
 		if STATE_MACHINE[state][key] exists, return STATE_MACHINE[state][key]
@@ -1339,11 +1335,8 @@ function sampleNPC.onTickNPC(v)
 		end
 	end
 
-	if v:mem(0x12C, FIELD_WORD) > 0    --Grabbed
-	or v:mem(0x136, FIELD_BOOL)        --Thrown
-	or v:mem(0x138, FIELD_WORD) > 0    --Contained within
+	if v.heldIndex ~= 0 or v.isProjectile or v.forcedState > 0
 	then
-		handleSpecialStates(v)
 		return
 	end
 
@@ -1361,11 +1354,22 @@ function sampleNPC.onDrawNPC(v)
 		return
 	end
 
+	-- Hardcoded, just use movement state frames
+	if v.heldIndex ~= 0 or v.isProjectile or v.forcedState > 0 then
+		getStateFunctionality(STATES.MOVING, "onDraw")(v)
+		npcUtils.hideNPC(v, nil)
+		return
+	end
+
 	runStateFunctionality(v, "onDraw")
 	npcUtils.hideNPC(v, nil)
 end
 
 function sampleNPC.onNPCHarm(eventToken, v, harmType, culpritOrNil)
+	if v.heldIndex ~= 0 or v.isProjectile or v.forcedState > 0 then
+		return
+	end
+
 	if v.id ~= npcID then return end
 	if harmType == HARM_TYPE_VANISH then return end
 
