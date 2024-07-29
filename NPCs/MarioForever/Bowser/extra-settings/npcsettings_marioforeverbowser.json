@@ -2171,6 +2171,14 @@
 					]
 				},
 				{
+					"control": "lineEdit",
+					"name": "defeat.event",
+					"title": "Event",
+					"tooltip": "Event to run on stun.\nEmpty string uses config value \"defeat.event\".",
+					"value-default": "",
+					"placeholder": "MyCoolEvent"
+				},
+				{
 					"control": "group",
 					"name": "..",
 					"title": "Default Behaviour",

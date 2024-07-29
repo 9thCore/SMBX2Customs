@@ -640,6 +640,7 @@ local STATE_MACHINE = {
 				data.sectionDirection = getValue(v, "defeat.default.direction")
 				data.sectionExtension = getValue(v, "defeat.default.extension")
 			end
+			triggerEvent(getValue(v, "defeat.event"))
 		end,
 		onTick = function(v)
 			local data = v.data
@@ -877,6 +878,7 @@ local USE_DEFAULT_VALUES = {
 	["battle.music.change"] = 0,
 	["battle.room.area.enabled"] = 0,
 	["battle.room.area.speed"] = 0,
+	["defeat.event"] = "",
 	["defeat.lava.ignore"] = 0,
 	["defeat.lava.splash.enabled"] = 0,
 	["defeat.lava.splash.range"] = 0,
@@ -1096,6 +1098,7 @@ local sampleNPCSettings = {
 	["defeat.default.direction"] = 2, -- Defeat Settings/Default Behaviour/Direction
 	["defeat.default.extension"] = 64, -- Defeat Settings/Default Behaviour/Section Extension
 	["defeat.default.wintype"] = 2, -- Defeat Settings/Default Behaviour/Level Win Type
+	["defeat.event"] = "", -- Defeat Settings/Event
 	["defeat.fall.coyotetime"] = 256, -- Defeat Settings/Fall/Coyote Time
 	["defeat.fall.speed"] = 1.5, -- Defeat Settings/Fall/Speed
 	["defeat.fall.lavaspeed"] = 0.75, -- Defeat Settings/Fall/Lava Speed
