@@ -2,4 +2,5 @@
 *.lvlx.backup
 *.png
 *.ogg
+lib/
 progress.json
