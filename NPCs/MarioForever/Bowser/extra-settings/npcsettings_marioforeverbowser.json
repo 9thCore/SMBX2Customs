@@ -364,7 +364,9 @@
 													"control": "soundFile",
 													"name": "attack.standard.breath.audio.file",
 													"title": "File",
-													"value-default": "marioforeverbowser/sounds/flame.ogg"
+													"directory": "episode",
+													"directory-relative": "episode",
+													"value-default": ""
 												}
 											]
 										}
@@ -638,7 +640,9 @@
 													"control": "soundFile",
 													"name": "attack.multi.breath.audio.file",
 													"title": "File",
-													"value-default": "marioforeverbowser/sounds/flame.ogg"
+													"directory": "episode",
+													"directory-relative": "episode",
+													"value-default": ""
 												}
 											]
 										}
@@ -920,7 +924,9 @@
 													"control": "soundFile",
 													"name": "attack.flamethrower.breath.audio.file",
 													"title": "File",
-													"value-default": "marioforeverbowser/sounds/flameloop.ogg"
+													"directory": "episode",
+													"directory-relative": "episode",
+													"value-default": ""
 												}
 											]
 										}
@@ -1229,6 +1235,8 @@
 													"control": "soundFile",
 													"name": "attack.hammer.projectile.audio.file",
 													"title": "File",
+													"directory": "episode",
+													"directory-relative": "episode",
 													"value-default": ""
 												}
 											]
@@ -1411,7 +1419,9 @@
 													"control": "soundFile",
 													"name": "hit.health.audio.hurt.file",
 													"title": "File",
-													"value-default": "marioforeverbowser/sounds/hit.ogg"
+													"directory": "episode",
+													"directory-relative": "episode",
+													"value-default": ""
 												}
 											]
 										}
@@ -2032,7 +2042,9 @@
 									"control": "musicFile",
 									"name": "battle.music.file",
 									"title": "File",
-									"value-default": "marioforeverbowser/sounds/battle.ogg"
+									"directory": "episode",
+									"directory-relative": "episode",
+									"value-default": ""
 								}
 							]
 						}
@@ -2297,7 +2309,9 @@
 											"control": "soundFile",
 											"name": "defeat.audio.stun.file",
 											"title": "File",
-											"value-default": "marioforeverbowser/sounds/stun.ogg"
+											"directory": "episode",
+											"directory-relative": "episode",
+											"value-default": ""
 										}
 									]
 								}
@@ -2347,7 +2361,9 @@
 											"control": "soundFile",
 											"name": "defeat.audio.fall.file",
 											"title": "File",
-											"value-default": "marioforeverbowser/sounds/falling.ogg"
+											"directory": "episode",
+											"directory-relative": "episode",
+											"value-default": ""
 										}
 									]
 								}
@@ -2397,7 +2413,9 @@
 											"control": "soundFile",
 											"name": "defeat.audio.lava.file",
 											"title": "File",
-											"value-default": "marioforeverbowser/sounds/lava.ogg"
+											"directory": "episode",
+											"directory-relative": "episode",
+											"value-default": ""
 										}
 									]
 								}
@@ -2447,7 +2465,9 @@
 											"control": "soundFile",
 											"name": "defeat.audio.jingle.file",
 											"title": "File",
-											"value-default": "marioforeverbowser/sounds/defeat.ogg"
+											"directory": "episode",
+											"directory-relative": "episode",
+											"value-default": ""
 										}
 									]
 								}
