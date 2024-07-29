@@ -250,6 +250,15 @@ local OUTSIDE_CAMERAS = function(v)
 	return true
 end
 
+local VALID_STATE = function(state)
+	for _, i in pairs(STATES) do
+		if i == state then
+			return true
+		end
+	end
+	return false
+end
+
 local DEFAULT_FUNCTIONS = {
 	onTick = function(v)
 		local data = v.data
@@ -1247,6 +1256,10 @@ local function runStateFunctionality(v, key, ...)
 end
 
 function setState(v, newState)
+	if not VALID_STATE(newState) then
+		newState = STATES.MOVING
+	end
+	
 	runStateFunctionality(v, "onExit")
 	v.data.state = newState
 	runStateFunctionality(v, "onEnter")
@@ -1278,7 +1291,6 @@ function sampleNPC.onTickNPC(v)
 		data.hp = getValue(v, "hit.health.hp")
 		data.subhp = getValue(v, "hit.health.sub")
 		data.state = getValue(v, "misc.startstate")
-		data.setState = setState
 		data.dir = RNG.randomInt(0, 1) * 2 - 1
 		data.speed = getValue(v, "movement.speed")
 		data.turnid = getID(v, "misc.turnaround")
