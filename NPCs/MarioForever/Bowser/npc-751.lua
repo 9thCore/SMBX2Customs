@@ -507,7 +507,7 @@ local STATE_MACHINE = {
 				data.flamethrowerCount = getRangeInt(v, "attack.flamethrower.breath.count")
 				data.flamethrowerNPC = getID(v, "attack.flamethrower.breath.npc")
 				data.flamethrowerCenter = (getValue(v, "attack.flamethrower.spawn.center") == 1) and true or false
-				data.nextFlame = data.timer - data.firecooldown
+				data.nextFlame = data.timer
 				data.flamethrowerStartTransition = data.timer
 				data.flamethrowerVolume = getValue(v, "attack.flamethrower.breath.audio.volume")
 
